@@ -1,31 +1,49 @@
 package br.bandtec.com.projetoimove.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "tb_endereco")
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_endereco")
     private Integer id;
+
+    @Column(name = "cep")
     private String cep;
+
+    @Column(name = "estado")
     private String estado;
+
+    @Column(name = "cidade")
     private String cidade;
+
+    @Column(name = "bairro")
     private String bairro;
+
+    @Column(name = "rua")
     private String rua;
+
+    @Column(name = "numero")
     private String numero;
 
-    public Endereco(Integer id, String cep, String estado, String cidade, String bairro, String rua, String numero) {
-        this.id = id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_locatario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
+
+    public Endereco(String cep, String estado, String cidade, String bairro, String rua, String numero) {
         this.cep = cep;
         this.estado = estado;
         this.cidade = cidade;
         this.bairro = bairro;
         this.rua = rua;
         this.numero = numero;
+    }
+
+    public Endereco() {
+
     }
 
     public Integer getId() {

@@ -1,26 +1,43 @@
 package br.bandtec.com.projetoimove.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+
 @Entity
-public class LocacaoBicicleta {
+@Table(name = "tb_locacao")
+public class Locacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_locacao")
     private Integer id;
+
+    @Column(name = "forma_pagamento")
     private String formaPagamento;
+
+    @Column(name = "data_hora_locacao")
     private LocalDateTime dataHoraLocacao;
+
+    @Column(name = "data_hora_devolucao")
     private LocalDateTime dataHoraDevolucao;
 
-    public LocacaoBicicleta(Integer id, String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
-        this.id = id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_bicicleta", referencedColumnName = "id_bicicleta")
+    private Bicicleta bicicleta;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario;
+
+    public Locacao(String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
         this.formaPagamento = formaPagamento;
         this.dataHoraLocacao = dataHoraLocacao;
         this.dataHoraDevolucao = dataHoraDevolucao;
+    }
+
+    public Locacao(){
+
     }
 
     public Integer getId() {
