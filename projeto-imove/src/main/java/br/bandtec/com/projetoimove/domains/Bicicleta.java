@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.List;
 
 @Entity
 public class Bicicleta {
@@ -17,18 +18,17 @@ public class Bicicleta {
     private String tamanhoAro;
     private String cor;
     private String velocidade;
-    private String valor_hora;
+    private String valorHora;
 
-    public Bicicleta(Integer id, String marca, String modelo, String categoria,
-                     String tamanhoAro, String cor, String velocidade, String valor_hora) {
-        this.id = id;
+    public Bicicleta(String marca, String modelo, String categoria,
+                     String tamanhoAro, String cor, String velocidade, String valorHora) {
         this.marca = marca;
         this.modelo = modelo;
         this.categoria = categoria;
         this.tamanhoAro = tamanhoAro;
         this.cor = cor;
         this.velocidade = velocidade;
-        this.valor_hora = valor_hora;
+        this.valorHora = valorHora;
     }
 
     public Bicicleta(){
@@ -91,11 +91,11 @@ public class Bicicleta {
         this.velocidade = velocidade;
     }
 
-    public String getValor_hora() {
-        return valor_hora;
+    public String getValorHora() {
+        return valorHora;
     }
 
-    public void setValor_hora(String valor_hora) {
-        this.valor_hora = valor_hora;
+    public void setValorHora(String valorHora) {
+        this.valorHora = valorHora;
     }
 }
