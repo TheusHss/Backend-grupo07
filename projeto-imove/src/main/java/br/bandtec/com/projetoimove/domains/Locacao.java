@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Entity
-public class LocacaoBicicleta {
+public class Locacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +16,14 @@ public class LocacaoBicicleta {
     private LocalDateTime dataHoraLocacao;
     private LocalDateTime dataHoraDevolucao;
 
-    public LocacaoBicicleta(Integer id, String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
+    public Locacao(Integer id, String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
         this.id = id;
         this.formaPagamento = formaPagamento;
         this.dataHoraLocacao = dataHoraLocacao;
         this.dataHoraDevolucao = dataHoraDevolucao;
+    }
+
+    public Locacao() {
     }
 
     public Integer getId() {

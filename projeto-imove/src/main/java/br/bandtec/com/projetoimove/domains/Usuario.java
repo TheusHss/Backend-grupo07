@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.domains;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,49 +9,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Usuario{
+public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // define o campo como valor autoincremento
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String nome;
     public String sobrenome;
     private String email;
-    public String senha;
-    public String cpf;
-    public String telefone;
+    private String senha;
+    private String cpf;
+    private String telefone;
     private String tipoUsuario;
     private Boolean autenticado;
-    private Date dataLogin;
-    private Date ultimaAutenticado;
-//    private Date dataCadastro;
+    private LocalDateTime dataLogin;
+    private LocalDateTime ultimaAutenticado;
 
-    public Usuario(String nome, String email, String senha, String tipoUsuario, String sobrenome, String cpf, String telefone) {
+    public Usuario(String nome, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario) {
         this.nome = nome;
+        this.sobrenome = sobrenome;
         this.email = email;
         this.senha = senha;
-        this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.telefone = telefone;
-        this.autenticado = false;
-        this.dataLogin = null;
-        this.ultimaAutenticado = null;
-//        this.dataCadastro = null;
         this.tipoUsuario = tipoUsuario;
     }
 
     public Usuario(){
-
-    }
-
-    public String getUltimaAutenticado() {
-        if (ultimaAutenticado != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            return formatter.format(ultimaAutenticado);
-        } else {
-            return null;
-        }
     }
 
     public Integer getId() {
@@ -61,16 +46,20 @@ public class Usuario{
         this.id = id;
     }
 
-    public void setUltimaAutenticado(Date ultimaAutenticado) {
-        this.ultimaAutenticado = ultimaAutenticado;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
     }
 
     public String getEmail() {
@@ -81,12 +70,28 @@ public class Usuario{
         this.email = email;
     }
 
-    private String getSenha() {
+    public String obterSenha() {
         return senha;
     }
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getTipoUsuario() {
@@ -105,27 +110,19 @@ public class Usuario{
         this.autenticado = autenticado;
     }
 
-    public String getDataLogin() {
-        if (dataLogin != null) {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-            return formatter.format(dataLogin);
-        } else {
-            return null;
-        }
+    public LocalDateTime getDataLogin() {
+        return dataLogin;
     }
 
-    public void setDataLogin(Date dataLogin) {
+    public void setDataLogin(LocalDateTime dataLogin) {
         this.dataLogin = dataLogin;
     }
 
-//    public String getDataCadastro() {
-//
-//        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-//        return formatter.format(dataCadastro);
-//    }
-//
-//    public void setDataCadastro(Date dataCadastro) {
-//        this.dataCadastro = dataCadastro;
-//    }
+    public LocalDateTime getUltimaAutenticado() {
+        return ultimaAutenticado;
+    }
 
+    public void setUltimaAutenticado(LocalDateTime ultimaAutenticado) {
+        this.ultimaAutenticado = ultimaAutenticado;
+    }
 }

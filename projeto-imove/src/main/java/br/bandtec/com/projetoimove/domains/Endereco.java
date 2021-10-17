@@ -27,6 +27,7 @@ public class Endereco {
         this.rua = rua;
         this.numero = numero;
     }
+    public Endereco(){}
 
     public Integer getId() {
         return id;
