@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.List;
 
 @Entity
-public class Bicicleta {
+public class Bicicleta{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

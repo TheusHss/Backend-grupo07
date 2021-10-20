@@ -10,6 +10,8 @@ public class ListaObj <T> {
         nroElem = 0;
     }
 
+
+
     public Boolean adiciona(T valor) {
         if (nroElem >= vetor.length) {
             System.out.println("Lista cheia!");
@@ -74,7 +76,6 @@ public class ListaObj <T> {
         }
     }
 
-    /* limpa() - limpa a lista */
     public void limpa() {
         nroElem = 0;
     }

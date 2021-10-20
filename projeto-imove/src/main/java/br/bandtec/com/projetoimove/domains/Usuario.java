@@ -1,8 +1,6 @@
 package br.bandtec.com.projetoimove.domains;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +22,8 @@ public class Usuario {
     private Boolean autenticado;
     private LocalDateTime dataLogin;
     private LocalDateTime ultimaAutenticado;
+
+
 
     public Usuario(String nome, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario) {
         this.nome = nome;

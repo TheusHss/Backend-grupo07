@@ -13,7 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bicicleta")
-public class BicicletaController {
+public class BicicletaController{
+
+
 
     @Autowired
     private BicicletaRepository repository;
@@ -45,7 +47,7 @@ public class BicicletaController {
     }
 
     @GetMapping("pesquisar/{categoria}")
-    public ResponseEntity filtarBicicletas(@PathVariable String categoria){
+    public ResponseEntity filtrarBicicletas(@PathVariable String categoria){
         List<Bicicleta> bicicletas = repository.findAll();
 
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
@@ -63,7 +65,7 @@ public class BicicletaController {
     }
 
     @GetMapping("pesquisar/{categoria}/{tamanhoAro}")
-    public ResponseEntity filtarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro){
+    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro){
         List<Bicicleta> bicicletas = repository.findAll();
 
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
@@ -81,7 +83,7 @@ public class BicicletaController {
     }
 
     @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}")
-    public ResponseEntity filtarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor){
+    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor){
         List<Bicicleta> bicicletas = repository.findAll();
 
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
@@ -101,7 +103,7 @@ public class BicicletaController {
     }
 
     @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}/{velocidade}")
-    public ResponseEntity filtarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade){
+    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade){
         List<Bicicleta> bicicletas = repository.findAll();
 
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
@@ -122,7 +124,7 @@ public class BicicletaController {
     }
 
     @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}/{velocidade}/{preco}")
-    public ResponseEntity filtarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade, @PathVariable String preco){
+    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade, @PathVariable String preco){
         List<Bicicleta> bicicletas = repository.findAll();
 
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
@@ -142,4 +144,6 @@ public class BicicletaController {
             return ResponseEntity.status(404).build();
         }
     }
+
+
 }
