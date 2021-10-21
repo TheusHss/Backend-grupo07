@@ -1,39 +1,24 @@
 package br.bandtec.com.projetoimove;
 
-public class ListaObj <T> {
+public class ListaObj <T> implements Iterator{
 
     private T[] vetor;
     private int nroElem;
+    private int posicao;
 
-    public ListaObj(int capacidade) {
-        vetor = (T[]) new Object[capacidade];
+    public ListaObj() {
+        vetor = (T[]) new Object[100000];
         nroElem = 0;
+        posicao = 0;
     }
 
 
-
-    public Boolean adiciona(T valor) {
-        if (nroElem >= vetor.length) {
-            System.out.println("Lista cheia!");
-            return false;
-        }
-        else {
-            vetor[nroElem++] = valor;
-            return true;
-        }
-    }
 
     public void exibe() {
-        if (nroElem == 0) {
-
+        while (hasNext()){
+            System.out.println(next());
         }
-        else {
-            System.out.println("\nLista:");
-            for (int i = 0; i < nroElem; i++) {
-                System.out.print(vetor[i] + "\t");
-            }
-            System.out.println();
-        }
+        limpa();
     }
 
     public int busca(T valorPesquisado) {
@@ -76,9 +61,34 @@ public class ListaObj <T> {
         }
     }
 
-    public void limpa() {
-        nroElem = 0;
+    @Override
+    public boolean hasNext() {
+        if (posicao >= vetor.length || vetor[posicao] == null){
+            return false;
+        } else {
+            return true;
+        }
     }
 
+    @Override
+    public T next() {
+        return vetor[posicao++];
+    }
+
+    @Override
+    public void limpa() {
+        posicao = 0;
+    }
+
+    public Boolean adiciona(T valor) {
+        if (nroElem >= vetor.length) {
+            System.out.println("Lista cheia!");
+            return false;
+        }
+        else {
+            vetor[nroElem++] = valor;
+            return true;
+        }
+    }
 }
 

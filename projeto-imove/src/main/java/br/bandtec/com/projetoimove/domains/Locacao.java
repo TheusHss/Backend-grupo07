@@ -12,13 +12,11 @@ public class Locacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String formaPagamento;
     private LocalDateTime dataHoraLocacao;
     private LocalDateTime dataHoraDevolucao;
 
-    public Locacao(Integer id, String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
-        this.id = id;
-        this.formaPagamento = formaPagamento;
+    public Locacao( LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
+
         this.dataHoraLocacao = dataHoraLocacao;
         this.dataHoraDevolucao = dataHoraDevolucao;
     }
@@ -32,14 +30,6 @@ public class Locacao {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(String formaPagamento) {
-        this.formaPagamento = formaPagamento;
     }
 
     public LocalDateTime getDataHoraLocacao() {

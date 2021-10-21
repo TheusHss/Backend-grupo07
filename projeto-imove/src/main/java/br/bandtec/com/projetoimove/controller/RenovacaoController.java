@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bicicleta")
+@RequestMapping("/renovacao")
 public class RenovacaoController {
 
     @Autowired
