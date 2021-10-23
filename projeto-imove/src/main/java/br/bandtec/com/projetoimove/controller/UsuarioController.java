@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.controller;
 
 import br.bandtec.com.projetoimove.ArquivoCSV;
+import java.io.FileNotFoundException;
 import br.bandtec.com.projetoimove.ListaObj;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
@@ -30,12 +31,13 @@ public class UsuarioController {
     @GetMapping("/todos")
     public ResponseEntity obterUsuarios() {
         List<Usuario> usuarios = repository.findAll();
-        funtionsCSV.leExibeArquivo("log-cadastro");
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(204).build();
         } else {
+            funtionsCSV.leExibeArquivo("log-cadastro");
             return ResponseEntity.status(200).body(usuarios);
         }
+
     }
 
     @PostMapping("/cadastrar")
