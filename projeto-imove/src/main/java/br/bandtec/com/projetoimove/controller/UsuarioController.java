@@ -66,6 +66,7 @@ public class UsuarioController {
                 if (u.getAutenticado()) {
                     u.setDataLogin(null);
                     u.setAutenticado(false);
+                    repository.save(u);
                     return ResponseEntity.status(200).build();
                 }
             }
