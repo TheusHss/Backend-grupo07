@@ -53,7 +53,7 @@ public class UsuarioController {
             if (usuarioItem.getEmail().equals(usuario.getEmail()) && usuarioItem.obterSenha().equals(usuario.obterSenha())) {
                 usuarioItem.setAutenticado(true);
                 repository.save(usuarioItem);
-                return ResponseEntity.status(201).build();
+                return ResponseEntity.status(201).body(usuarioItem);
             }
         }
         return ResponseEntity.status(404).build();
