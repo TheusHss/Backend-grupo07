@@ -1,7 +1,6 @@
 package br.bandtec.com.projetoimove.controller;
 
 import br.bandtec.com.projetoimove.ArquivoCSV;
-import java.io.FileNotFoundException;
 import br.bandtec.com.projetoimove.ListaObj;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
@@ -37,7 +36,6 @@ public class UsuarioController {
             funtionsCSV.leExibeArquivo("log-cadastro");
             return ResponseEntity.status(200).body(usuarios);
         }
-
     }
 
     @PostMapping("/cadastrar")
@@ -83,7 +81,7 @@ public class UsuarioController {
             if (u.getEmail().equals(u.getEmail()) && u.obterSenha().equals(u.obterSenha())) {
                 usuario.setAutenticado(true);
                 repository.deleteById(u.getId());
-                return ResponseEntity.status(201).build();
+                return ResponseEntity.status(200).build();
             }
         }
         return ResponseEntity.status(400).build();

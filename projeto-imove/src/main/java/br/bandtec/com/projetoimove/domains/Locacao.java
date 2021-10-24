@@ -1,22 +1,25 @@
 package br.bandtec.com.projetoimove.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Table(name = "tb_locacao")
 @Entity
 public class Locacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_locacao", nullable = false)
     private Integer id;
+    @Column(name = "forma_pagamento")
+    private String formaPagamento;
+    @Column(name = "data_hora_locacao")
     private LocalDateTime dataHoraLocacao;
+    @Column(name = "data_hora_devolucao")
     private LocalDateTime dataHoraDevolucao;
 
-    public Locacao( LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
-
+    public Locacao(String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
+        this.formaPagamento = formaPagamento;
         this.dataHoraLocacao = dataHoraLocacao;
         this.dataHoraDevolucao = dataHoraDevolucao;
     }
@@ -30,6 +33,14 @@ public class Locacao {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public LocalDateTime getDataHoraLocacao() {

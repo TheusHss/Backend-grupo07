@@ -1,23 +1,29 @@
 package br.bandtec.com.projetoimove.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
+@Table(name = "tb_bicicleta")
 @Entity
 public class Bicicleta{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_bicicleta", nullable = false)
     private Integer id;
+    @Column(name = "marca")
     private String marca;
+    @Column(name = "modelo")
     private String modelo;
+    @Column(name = "categoria")
     private String categoria;
+    @Column(name = "tamanho_aro")
     private String tamanhoAro;
+    @Column(name = "cor")
     private String cor;
+    @Column(name = "velocidade")
     private String velocidade;
+    @Column(name = "valor_hora")
     private String valorHora;
 
     public Bicicleta(String marca, String modelo, String categoria,

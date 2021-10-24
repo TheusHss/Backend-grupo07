@@ -1,18 +1,19 @@
 package br.bandtec.com.projetoimove.domains;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Table(name = "tb_renovacao")
 @Entity
 public class Renovacao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_renovacao", nullable = false)
     private Integer id;
+    @Column(name = "data_hora_renovacao")
     private LocalDateTime dataHoraRenovacao;
+    @Column(name = "data_hora_devolucao")
     private LocalDateTime dataHoraDevolucao;
 
     public Renovacao(LocalDateTime dataHoraRenovacao, LocalDateTime dataHoraDevolucao) {

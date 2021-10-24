@@ -1,31 +1,40 @@
 package br.bandtec.com.projetoimove.domains;
 
 import java.time.LocalDateTime;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Table(name = "tb_usuario")
 @Entity
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario", nullable = false)
     private Integer id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "sobrenome")
     public String sobrenome;
+    @Column(name = "email")
     private String email;
+    @Column(name = "senha")
     private String senha;
+    @Column(name = "cpf", length = 11)
     private String cpf;
+    @Column(name = "telefone")
     private String telefone;
+    @Column(name = "tipo_usuario")
     private String tipoUsuario;
+    @Column(name = "autenticado")
     private Boolean autenticado;
+    @Column(name = "data_login")
     private LocalDateTime dataLogin;
+    @Column(name = "ultima_autenticacao")
     private LocalDateTime ultimaAutenticado;
 
 
 
-    public Usuario(String nome, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario) {
+    public Usuario(String nome, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario, Boolean autenticado) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -33,6 +42,7 @@ public class Usuario {
         this.cpf = cpf;
         this.telefone = telefone;
         this.tipoUsuario = tipoUsuario;
+        this.autenticado= autenticado;
     }
 
     public Usuario(){
