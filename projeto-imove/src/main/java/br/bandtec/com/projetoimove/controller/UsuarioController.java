@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -52,8 +55,10 @@ public class UsuarioController {
         for (Usuario usuarioItem : repository.findAll()) {
             if (usuarioItem.getEmail().equals(usuario.getEmail()) && usuarioItem.obterSenha().equals(usuario.obterSenha())) {
                 usuarioItem.setAutenticado(true);
+                usuarioItem.setUltimaAutenticado(LocalDateTime.now());
+                usuarioItem.setDataLogin(LocalDateTime.now());
                 repository.save(usuarioItem);
-                return ResponseEntity.status(201).body(usuarioItem);
+                return ResponseEntity.status(200).build();
             }
         }
         return ResponseEntity.status(404).build();
@@ -66,6 +71,7 @@ public class UsuarioController {
                 if (u.getAutenticado()) {
                     u.setDataLogin(null);
                     u.setAutenticado(false);
+                    u.setDataLogin(null);
                     repository.save(u);
                     return ResponseEntity.status(200).build();
                 }
