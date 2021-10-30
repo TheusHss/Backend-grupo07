@@ -1,17 +1,20 @@
 package br.bandtec.com.projetoimove.controller;
 
 import br.bandtec.com.projetoimove.ArquivoCSV;
+import br.bandtec.com.projetoimove.ArquivoTXT;
 import br.bandtec.com.projetoimove.ListaObj;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import javax.servlet.ServletContext;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,7 +27,7 @@ import java.util.stream.Collectors;
 public class UsuarioController {
 
     ArquivoCSV funtionsCSV = new ArquivoCSV();
-
+    ArquivoTXT gravaTxt = new ArquivoTXT();
     ListaObj<Usuario> listaObj = new ListaObj();
 
     @Autowired
@@ -93,4 +96,32 @@ public class UsuarioController {
         return ResponseEntity.status(400).build();
     }
 
+    @Autowired
+    ServletContext context;
+
+    @PostMapping("/fileupload/file")
+    public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile) {
+        FileInfo fileInfo = new FileInfo();
+        HttpHeaders headers = new HttpHeaders();
+        if (!inputFile.isEmpty()) {
+            try {
+                File convFile = new File("C:/Users/ms108/Documents/" + inputFile.getOriginalFilename());
+                inputFile.transferTo(convFile);
+                headers.add("File Uploaded Successfully - ", "teste");
+                return new ResponseEntity<FileInfo>(fileInfo, headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<FileInfo>(HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<FileInfo>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+        @GetMapping("/obter-arquivo")
+    public ResponseEntity obterArquivo() {
+            List<Usuario> usuarios = repository.findAll();
+        gravaTxt.gravaArquivoTxt(usuarios, "Arquivo-bike.txt");
+        return ResponseEntity.status(200).build();
+    }
 }
