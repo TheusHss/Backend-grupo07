@@ -1,17 +1,25 @@
-Cadastre aqui suas bicicletas de uma vez! - 31-10-2021 23:04:00
-01-Categoria: a
-02-Cor: a
-03-Tamanho-aro:a
-04-Velocidade:a
-05-Valor-hora:a
-06-Marca:a
-07-Modelo:a
-PULE ESTÁ LINHA
-01-Categoria: a
-02-Cor: a
-03-Tamanho-aro:a
-04-Velocidade:a
-05-Valor-hora:a
-06-Marca:a
-07-Modelo:a
-PULE ESTÁ LINHA
+Cadastre aqui suas bicicletas de uma vez! - 01-11-2021 16:36:14
+01-Categoria:
+02-Cor:
+03-Tamanho-aro:
+04-Velocidade:
+05-Valor-hora:
+06-Marca:
+07-Modelo:
+PULE ESTA LINHA
+01-Categoria:
+02-Cor:
+03-Tamanho-aro:
+04-Velocidade:
+05-Valor-hora:
+06-Marca:
+07-Modelo:
+PULE ESTA LINHA
+01-Categoria:
+02-Cor:
+03-Tamanho-aro:
+04-Velocidade:
+05-Valor-hora:
+06-Marca:
+07-Modelo:
+PULE ESTA LINHA

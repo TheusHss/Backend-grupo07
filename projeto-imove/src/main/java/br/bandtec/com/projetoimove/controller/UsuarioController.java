@@ -61,7 +61,7 @@ public class UsuarioController {
                 usuarioItem.setUltimaAutenticado(LocalDateTime.now());
                 usuarioItem.setDataLogin(LocalDateTime.now());
                 repository.save(usuarioItem);
-                return ResponseEntity.status(200).build();
+                return ResponseEntity.status(200).body(usuarioItem.getTipoUsuario());
             }
         }
         return ResponseEntity.status(404).build();

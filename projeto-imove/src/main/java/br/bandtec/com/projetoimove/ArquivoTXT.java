@@ -209,7 +209,6 @@ public class ArquivoTXT {
                     bike.setValorHora(valorHora);
                     bike.setVelocidade(velocidade);
                     r.save(bike);
-                    System.out.println(bike);
                     contCadaSete = contCadaSete + 7;
                 }
 
