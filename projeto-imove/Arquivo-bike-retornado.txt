@@ -1,0 +1,17 @@
+Cadastre aqui suas bicicletas de uma vez! - 31-10-2021 23:04:00
+01-Categoria: a
+02-Cor: a
+03-Tamanho-aro:a
+04-Velocidade:a
+05-Valor-hora:a
+06-Marca:a
+07-Modelo:a
+PULE ESTÁ LINHA
+01-Categoria: a
+02-Cor: a
+03-Tamanho-aro:a
+04-Velocidade:a
+05-Valor-hora:a
+06-Marca:a
+07-Modelo:a
+PULE ESTÁ LINHA

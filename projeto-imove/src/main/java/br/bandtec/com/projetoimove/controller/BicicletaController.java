@@ -1,13 +1,25 @@
 package br.bandtec.com.projetoimove.controller;
 
+import br.bandtec.com.projetoimove.ArquivoTXT;
 import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.BicicletaRepository;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +27,8 @@ import java.util.List;
 @RequestMapping("/bicicleta")
 public class BicicletaController{
 
+
+    ArquivoTXT gravaTxt = new ArquivoTXT();
 
 
     @Autowired
@@ -145,5 +159,53 @@ public class BicicletaController{
         }
     }
 
+    @GetMapping("/obter-arquivo/{qtdBikes}")
+    public ResponseEntity<?> download(@PathVariable int qtdBikes) {
+        gravaTxt.criarArquivoTxt("Arquivo-bike.txt", qtdBikes);
+
+        var filename = String.format("Arquivo-bike.txt");
+
+        try {
+            File file = new File(filename);
+            var path = Paths.get(file.getAbsolutePath());
+            var resource = new ByteArrayResource(Files.readAllBytes(path));
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .contentLength(file.length())
+                    .body(resource);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Autowired
+    ServletContext context;
+
+    @PostMapping("/fileupload/file")
+    public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile) {
+        FileInfo fileInfo = new FileInfo();
+        HttpHeaders headers = new HttpHeaders();
+        if (!inputFile.isEmpty()) {
+            try {
+                File file = new File("Arquivo-bike-retornado.txt");
+                var path = Paths.get(file.getAbsolutePath());
+                inputFile.transferTo(path);
+                headers.add("Arquivo recebido - ", "bicicleta");
+
+                gravaTxt.leArquivoRetonadoEgravaTxt("Arquivo-bike-retornado.txt", repository);
+
+                return new ResponseEntity<FileInfo>(fileInfo, headers, HttpStatus.OK);
+            } catch (Exception e) {
+                return new ResponseEntity<FileInfo>(HttpStatus.NOT_FOUND);
+            }
+        } else {
+            return new ResponseEntity<FileInfo>(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 }

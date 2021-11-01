@@ -95,33 +95,4 @@ public class UsuarioController {
         }
         return ResponseEntity.status(400).build();
     }
-
-    @Autowired
-    ServletContext context;
-
-    @PostMapping("/fileupload/file")
-    public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile) {
-        FileInfo fileInfo = new FileInfo();
-        HttpHeaders headers = new HttpHeaders();
-        if (!inputFile.isEmpty()) {
-            try {
-                File convFile = new File("C:/Users/ms108/Documents/" + inputFile.getOriginalFilename());
-                inputFile.transferTo(convFile);
-                headers.add("File Uploaded Successfully - ", "teste");
-                return new ResponseEntity<FileInfo>(fileInfo, headers, HttpStatus.OK);
-            } catch (Exception e) {
-                return new ResponseEntity<FileInfo>(HttpStatus.BAD_REQUEST);
-            }
-        } else {
-            return new ResponseEntity<FileInfo>(HttpStatus.BAD_REQUEST);
-        }
-
-    }
-
-        @GetMapping("/obter-arquivo")
-    public ResponseEntity obterArquivo() {
-            List<Usuario> usuarios = repository.findAll();
-        gravaTxt.gravaArquivoTxt(usuarios, "Arquivo-bike.txt");
-        return ResponseEntity.status(200).build();
-    }
 }
