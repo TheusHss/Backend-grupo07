@@ -185,7 +185,7 @@ public class BicicletaController{
     @Autowired
     ServletContext context;
 
-    @PostMapping("/envio-arquivo")
+    @PostMapping("/envio-arquivo/file")
     public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile) {
         FileInfo fileInfo = new FileInfo();
         HttpHeaders headers = new HttpHeaders();
