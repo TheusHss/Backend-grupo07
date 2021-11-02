@@ -37,8 +37,6 @@ public class ArquivoTXT {
         File file = new File(nomeArq);
         file.delete();
 
-
-        // Monta o registro de header
         String header = "Cadastre aqui suas bicicletas de uma vez! - ";
         Date dataDeHoje = new Date();
         SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -65,6 +63,12 @@ public class ArquivoTXT {
             corpo = qtdBikes > 1 ? "PULE ESTA LINHA" : "";
             gravaRegistro(nomeArq, corpo);
         }
+
+        String trailer;
+        trailer = "Verifique se o preenchimento dos campos estão correto antes de enviar,\n" +
+                "caso esteja errado edite na tela de suas bicicletas ou entre em contato.\nIMove Agredece!";
+        gravaRegistro(nomeArq,trailer);
+
     }
 
     public static void leArquivoRetonadoEgravaTxt(String nomeArq, BicicletaRepository r) {

@@ -1,4 +1,4 @@
-Cadastre aqui suas bicicletas de uma vez! - 01-11-2021 22:42:07
+Cadastre aqui suas bicicletas de uma vez! - 01-11-2021 23:00:30
 01-Categoria:
 02-Cor:
 03-Tamanho-aro:
@@ -6,4 +6,23 @@ Cadastre aqui suas bicicletas de uma vez! - 01-11-2021 22:42:07
 05-Valor-hora:
 06-Marca:
 07-Modelo:
-
+PULE ESTA LINHA
+01-Categoria:
+02-Cor:
+03-Tamanho-aro:
+04-Velocidade:
+05-Valor-hora:
+06-Marca:
+07-Modelo:
+PULE ESTA LINHA
+01-Categoria:
+02-Cor:
+03-Tamanho-aro:
+04-Velocidade:
+05-Valor-hora:
+06-Marca:
+07-Modelo:
+PULE ESTA LINHA
+Verifique se o preenchimento dos campos estão correto antes de enviar,
+caso esteja errado edite na tela de suas bicicletas ou entre em contato.
+IMove Agredece!
