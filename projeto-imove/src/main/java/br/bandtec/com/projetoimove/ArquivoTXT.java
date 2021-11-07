@@ -72,7 +72,7 @@ public class ArquivoTXT {
 
     }
 
-    public static void leArquivoRetonadoEgravaTxt(String nomeArq, BicicletaRepository r) {
+    public static void leArquivoRetonadoEgravaTxt(String nomeArq, BicicletaRepository r, PilhaObj<Bicicleta> pilha) {
         BufferedReader entrada = null;
         String registro, tipoRegistro;
 
@@ -149,6 +149,7 @@ public class ArquivoTXT {
                     bike.setValorHora(valorHora);
                     bike.setVelocidade(velocidade);
                     r.save(bike);
+                    pilha.push(bike);
                     contCadaSete = contCadaSete + 7;
                 }
 

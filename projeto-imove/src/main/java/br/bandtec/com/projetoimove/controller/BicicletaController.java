@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.controller;
 
 import br.bandtec.com.projetoimove.ArquivoTXT;
+import br.bandtec.com.projetoimove.PilhaObj;
 import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.BicicletaRepository;
@@ -29,6 +30,7 @@ public class BicicletaController{
 
 
     ArquivoTXT gravaTxt = new ArquivoTXT();
+    PilhaObj<Bicicleta> pilha = new PilhaObj(500);
 
 
     @Autowired
@@ -47,7 +49,18 @@ public class BicicletaController{
     @PostMapping("/cadastrar")
     public ResponseEntity cadastrarBicicleta(@RequestBody Bicicleta bike) {
         repository.save(bike);
+        pilha.push(bike);
         return ResponseEntity.status(201).build();
+    }
+
+    @PostMapping("/remover-ultima")
+    public ResponseEntity removerBike(){
+        if (!pilha.isEmpty()){
+            repository.delete(pilha.pop());
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+
     }
 
     @DeleteMapping("remover/{id}")
@@ -196,7 +209,7 @@ public class BicicletaController{
                 inputFile.transferTo(path);
                 headers.add("Arquivo recebido - ", "bicicleta");
 
-                gravaTxt.leArquivoRetonadoEgravaTxt("Arquivo-bike-retornado.txt", repository);
+                gravaTxt.leArquivoRetonadoEgravaTxt("Arquivo-bike-retornado.txt", repository, pilha);
 
                 return new ResponseEntity<FileInfo>(fileInfo, headers, HttpStatus.OK);
             } catch (Exception e) {

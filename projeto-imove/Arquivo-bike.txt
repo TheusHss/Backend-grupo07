@@ -1,28 +1,4 @@
-Cadastre aqui suas bicicletas de uma vez! - 06-11-2021 21:26:46
-01-Categoria:
-02-Cor:
-03-Tamanho-aro:
-04-Velocidade:
-05-Valor-hora:
-06-Marca:
-07-Modelo:
-PULE ESTA LINHA
-01-Categoria:
-02-Cor:
-03-Tamanho-aro:
-04-Velocidade:
-05-Valor-hora:
-06-Marca:
-07-Modelo:
-PULE ESTA LINHA
-01-Categoria:
-02-Cor:
-03-Tamanho-aro:
-04-Velocidade:
-05-Valor-hora:
-06-Marca:
-07-Modelo:
-------------------
-Quantidade de bicicletas 3. Verifique se o preenchimento dos campos estão correto antes de enviar,
+Cadastre aqui suas bicicletas de uma vez! - 06-11-2021 21:28:46
+Quantidade de bicicletas 0. Verifique se o preenchimento dos campos estão corretos antes de enviar,
 caso esteja errado edite na tela de suas bicicletas ou entre em contato.
 IMove Agredece!
