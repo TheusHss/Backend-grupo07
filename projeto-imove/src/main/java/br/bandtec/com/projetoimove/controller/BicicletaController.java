@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.controller;
 
 import br.bandtec.com.projetoimove.ArquivoTXT;
+import br.bandtec.com.projetoimove.FilaObj;
 import br.bandtec.com.projetoimove.PilhaObj;
 import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Usuario;
@@ -31,7 +32,7 @@ public class BicicletaController{
 
     ArquivoTXT gravaTxt = new ArquivoTXT();
     PilhaObj<Bicicleta> pilha = new PilhaObj(500);
-
+    PilhaObj<Bicicleta> pilhaAux = new PilhaObj(500);
 
     @Autowired
     private BicicletaRepository repository;
@@ -39,6 +40,7 @@ public class BicicletaController{
     @GetMapping("/todos")
     public ResponseEntity getUsuarios() {
         List<Bicicleta> bike = repository.findAll();
+
         if (bike.isEmpty()) {
             return ResponseEntity.status(204).build();
         } else {
@@ -53,10 +55,22 @@ public class BicicletaController{
         return ResponseEntity.status(201).build();
     }
 
-    @PostMapping("/remover-ultima")
+    @DeleteMapping("/remover-ultima")
     public ResponseEntity removerBike(){
         if (!pilha.isEmpty()){
+            pilhaAux.push(pilha.peek());
             repository.delete(pilha.pop());
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(204).build();
+
+    }
+
+    @PostMapping("/adicionar-ultima")
+    public ResponseEntity adicionarBike(){
+        if (!pilhaAux.isEmpty()){
+            pilha.push(pilhaAux.peek());
+            repository.save(pilhaAux.pop());
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(404).build();

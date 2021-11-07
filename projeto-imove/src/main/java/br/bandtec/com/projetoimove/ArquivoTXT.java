@@ -84,6 +84,7 @@ public class ArquivoTXT {
         }
 
         try {
+            FilaObj<Bicicleta> bikeFila = new FilaObj<>(500);
             registro = entrada.readLine();
             String categoria = "";
             String cor = "";
@@ -148,12 +149,19 @@ public class ArquivoTXT {
                     bike.setTamanhoAro(tamanhoAro);
                     bike.setValorHora(valorHora);
                     bike.setVelocidade(velocidade);
-                    r.save(bike);
-                    pilha.push(bike);
+                    bikeFila.insert(bike);
                     contCadaSete = contCadaSete + 7;
                 }
 
             }
+            for (int i = 0; i <= bikeFila.getTamanho(); i++){
+                Bicicleta b = bikeFila.poll();
+                if (b.getCategoria() != null && b.getMarca() != null && b.getModelo() != null){
+                    r.save(b);
+                    pilha.push(b);
+                }
+            }
+
             entrada.close();
 
         } catch (IOException erro) {
