@@ -60,12 +60,13 @@ public class ArquivoTXT {
             gravaRegistro(nomeArq, corpo);
             corpo = "07-Modelo:";
             gravaRegistro(nomeArq, corpo);
-            corpo = qtdBikes > 1 ? "PULE ESTA LINHA" : "";
+            corpo = (qtdBikes > 1 && i+1 < qtdBikes) ? "PULE ESTA LINHA" : "------------------";
             gravaRegistro(nomeArq, corpo);
         }
 
         String trailer;
-        trailer = "Verifique se o preenchimento dos campos estão correto antes de enviar,\n" +
+        trailer = "Quantidade de bicicletas "+ qtdBikes + ". " +
+                "Verifique se o preenchimento dos campos estão corretos antes de enviar,\n" +
                 "caso esteja errado edite na tela de suas bicicletas ou entre em contato.\nIMove Agredece!";
         gravaRegistro(nomeArq,trailer);
 
