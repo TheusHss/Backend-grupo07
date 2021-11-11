@@ -4,7 +4,9 @@ import br.bandtec.com.projetoimove.ArquivoCSV;
 import br.bandtec.com.projetoimove.ArquivoTXT;
 import br.bandtec.com.projetoimove.ListaObj;
 import br.bandtec.com.projetoimove.domains.Usuario;
+import br.bandtec.com.projetoimove.model.Mail;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
+import br.bandtec.com.projetoimove.service.MailService;
 import org.apache.tomcat.jni.FileInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,6 +35,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository repository;
+
+    @Autowired
+    private MailService mailService;
 
     @GetMapping("/todos")
     public ResponseEntity obterUsuarios() {
@@ -52,6 +58,51 @@ public class UsuarioController {
         ListaObj<Usuario> listaObj = new ListaObj();
         return ResponseEntity.status(201).build();
     }
+
+    @PostMapping("/enviar-email-senha/{email}")
+    public ResponseEntity enviarEmail(@PathVariable String email) {
+        String nome = null;
+        try {
+            List<Usuario> usuarios = repository.findAll();
+
+            if (!usuarios.isEmpty()) {
+                for (Usuario u : usuarios) {
+                    if (u.getEmail().equals(email)) {
+                        nome = u.getNome();
+                        Mail mail = new Mail();
+                        mail.setMailFrom(email);
+                        mail.setMailTo(email);
+                        mail.setMailSubject("Código para alterar sua senha");
+                        long digitos = (long) (0000 + Math.random() * 8999);
+                        mail.setMailContent("Olá " + nome + ", Seu código:\n\n" + digitos +
+                                "\n\nNão compartilhe!!!" +
+                                "\nIMOVE AGRADEÇE");
+                        mailService.sendEmail(mail);
+                        return ResponseEntity.status(200).body(digitos);
+                    }
+                }
+            }
+            return ResponseEntity.status(404).build();
+        } catch (Exception err) {
+            return ResponseEntity.status(404).build();
+        }
+    }
+
+    @PutMapping("/alterar-senha/{email}/{senha}")
+    public ResponseEntity alterarSenha(@PathVariable String email, @PathVariable String senha) {
+        List<Usuario> usuarios = repository.findAll();
+        if (!usuarios.isEmpty()) {
+            for (Usuario u : usuarios) {
+                if (u.getEmail().equals(email)) {
+                    u.setSenha(senha);
+                    repository.save(u);
+                    return ResponseEntity.status(200).build();
+                }
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
 
     @PostMapping("/autenticar")
     public ResponseEntity autenticarUsuario(@RequestBody Usuario usuario) {
