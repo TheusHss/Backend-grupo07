@@ -29,9 +29,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    ArquivoCSV funtionsCSV = new ArquivoCSV();
+//    ArquivoCSV funtionsCSV = new ArquivoCSV();
     ArquivoTXT gravaTxt = new ArquivoTXT();
-    ListaObj<Usuario> listaObj = new ListaObj();
+//    ListaObj<Usuario> listaObj = new ListaObj();
 
     @Autowired
     private UsuarioRepository repository;
@@ -45,17 +45,17 @@ public class UsuarioController {
         if (usuarios.isEmpty()) {
             return ResponseEntity.status(204).build();
         } else {
-            funtionsCSV.leExibeArquivo("log-cadastro");
+//            funtionsCSV.leExibeArquivo("log-cadastro");
             return ResponseEntity.status(200).body(usuarios);
         }
     }
 
     @PostMapping("/cadastrar")
     public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuario) {
-        listaObj.adiciona(usuario);
+//        listaObj.adiciona(usuario);
         repository.save(usuario);
-        funtionsCSV.gravaLista(listaObj, "log-cadastro");
-        ListaObj<Usuario> listaObj = new ListaObj();
+//        funtionsCSV.gravaLista(listaObj, "log-cadastro");
+//        ListaObj<Usuario> listaObj = new ListaObj();
         return ResponseEntity.status(201).build();
     }
 

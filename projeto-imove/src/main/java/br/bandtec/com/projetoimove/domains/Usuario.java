@@ -21,6 +21,8 @@ public class Usuario {
     private String senha;
     @Column(name = "cpf", length = 11)
     private String cpf;
+    @ManyToOne
+    private Endereco endereco;
     @Column(name = "telefone")
     private String telefone;
     @Column(name = "tipo_usuario")
@@ -46,6 +48,15 @@ public class Usuario {
     }
 
     public Usuario(){
+    }
+
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Integer getId() {
