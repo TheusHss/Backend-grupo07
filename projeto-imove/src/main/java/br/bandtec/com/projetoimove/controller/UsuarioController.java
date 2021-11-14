@@ -29,8 +29,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-//    ArquivoCSV funtionsCSV = new ArquivoCSV();
+    //    ArquivoCSV funtionsCSV = new ArquivoCSV();
     ArquivoTXT gravaTxt = new ArquivoTXT();
+    int codigoArmazenado;
 //    ListaObj<Usuario> listaObj = new ListaObj();
 
     @Autowired
@@ -59,6 +60,15 @@ public class UsuarioController {
         return ResponseEntity.status(201).build();
     }
 
+    @PostMapping("/verificar-codigo/{codigo}")
+    public ResponseEntity validarCodigo(@PathVariable String codigo) {
+        int codigoRecebido = Integer.parseInt(codigo);
+        if (codigoRecebido == codigoArmazenado) {
+            return ResponseEntity.status(200).build();
+        }
+        return ResponseEntity.status(404).build();
+    }
+
     @PostMapping("/enviar-email-senha/{email}")
     public ResponseEntity enviarEmail(@PathVariable String email) {
         String nome = null;
@@ -73,11 +83,12 @@ public class UsuarioController {
                         mail.setMailFrom(email);
                         mail.setMailTo(email);
                         mail.setMailSubject("Código para alterar sua senha");
-                        long digitos = (long) (0000 + Math.random() * 8999);
+                        int digitos = (int) (0000 + Math.random() * 8999);
                         mail.setMailContent("Olá " + nome + ", Seu código:\n\n" + digitos +
                                 "\n\nNão compartilhe!!!" +
                                 "\nIMOVE AGRADEÇE");
                         mailService.sendEmail(mail);
+                        codigoArmazenado = digitos;
                         return ResponseEntity.status(200).body(digitos);
                     }
                 }
