@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.domains;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Table(name = "tb_bicicleta")
@@ -11,18 +12,25 @@ public class Bicicleta{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bicicleta", nullable = false)
     private Integer id;
+    @NotBlank
     @Column(name = "marca")
     private String marca;
+    @NotBlank
     @Column(name = "modelo")
     private String modelo;
+    @NotBlank
     @Column(name = "categoria")
     private String categoria;
+    @NotBlank
     @Column(name = "tamanho_aro")
     private String tamanhoAro;
+    @NotBlank
     @Column(name = "cor")
     private String cor;
+    @NotBlank
     @Column(name = "velocidade")
     private String velocidade;
+    @NotBlank
     @Column(name = "valor_hora")
     private String valorHora;
 

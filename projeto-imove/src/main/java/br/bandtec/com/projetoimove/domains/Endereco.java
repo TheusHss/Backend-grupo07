@@ -1,6 +1,7 @@
 package br.bandtec.com.projetoimove.domains;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Table(name = "tb_endereco")
 @Entity
@@ -10,16 +11,22 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_endereco", nullable = false)
     private Integer id;
+    @NotBlank
     @Column(name = "cep")
     private String cep;
+    @NotBlank
     @Column(name = "estado")
     private String estado;
+    @NotBlank
     @Column(name = "cidade")
     private String cidade;
+    @NotBlank
     @Column(name = "bairro")
     private String bairro;
+    @NotBlank
     @Column(name = "rua")
     private String rua;
+    @NotBlank
     @Column(name = "numero")
     private String numero;
 

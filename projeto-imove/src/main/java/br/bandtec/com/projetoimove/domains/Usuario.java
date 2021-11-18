@@ -1,5 +1,7 @@
 package br.bandtec.com.projetoimove.domains;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
@@ -11,20 +13,27 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario", nullable = false)
     private Integer id;
+    @NotBlank
     @Column(name = "nome")
     private String nome;
+    @NotBlank
     @Column(name = "sobrenome")
     public String sobrenome;
+    @NotBlank
     @Column(name = "email")
     private String email;
+    @NotBlank
     @Column(name = "senha")
     private String senha;
+    @NotBlank
     @Column(name = "cpf", length = 11)
     private String cpf;
     @ManyToOne
     private Endereco endereco;
+    @NotBlank
     @Column(name = "telefone")
     private String telefone;
+    @NotBlank
     @Column(name = "tipo_usuario")
     private String tipoUsuario;
     @Column(name = "autenticado")
