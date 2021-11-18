@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/locacao")
 public class LocacaoController {
@@ -17,7 +19,13 @@ public class LocacaoController {
     @PostMapping("/cadastrar-locacao")
     public ResponseEntity cadastrarLocacao(@RequestBody Locacao locacao) {
         repository.save(locacao);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(201).body(locacao.getId());
+    }
+
+    @GetMapping("/consultar-locacao/{id}")
+    public ResponseEntity consultarLocacao(@PathVariable int id){
+        Optional<Locacao> locacao =  repository.findById(id);
+        return ResponseEntity.status(200).body(locacao);
     }
 
     @DeleteMapping("cancelar/{id}")
