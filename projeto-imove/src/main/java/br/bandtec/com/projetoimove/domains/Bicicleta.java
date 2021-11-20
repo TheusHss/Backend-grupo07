@@ -33,9 +33,12 @@ public class Bicicleta{
     @NotBlank
     @Column(name = "valor_hora")
     private String valorHora;
+    @ManyToOne
+    private Usuario usuario;
 
-    public Bicicleta(String marca, String modelo, String categoria,
-                     String tamanhoAro, String cor, String velocidade, String valorHora) {
+
+    public Bicicleta(Integer id, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, String valorHora, Usuario usuario) {
+        this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.categoria = categoria;
@@ -43,10 +46,19 @@ public class Bicicleta{
         this.cor = cor;
         this.velocidade = velocidade;
         this.valorHora = valorHora;
+        this.usuario = usuario;
     }
 
     public Bicicleta(){
 
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Integer getId() {
