@@ -33,6 +33,9 @@ public class Bicicleta{
     @NotBlank
     @Column(name = "valor_hora")
     private String valorHora;
+    @NotBlank
+    @Column(name = "imagem")
+    private String imagem;
     @ManyToOne
     private Usuario usuario;
 
