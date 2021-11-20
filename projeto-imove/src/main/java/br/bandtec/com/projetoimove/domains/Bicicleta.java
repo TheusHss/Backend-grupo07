@@ -30,17 +30,11 @@ public class Bicicleta{
     @NotBlank
     @Column(name = "velocidade")
     private String velocidade;
-    @NotBlank
-    @Column(name = "valor_hora")
-    private String valorHora;
-    @NotBlank
-    @Column(name = "imagem")
-    private String imagem;
     @ManyToOne
     private Usuario usuario;
 
 
-    public Bicicleta(Integer id, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, String valorHora, Usuario usuario) {
+    public Bicicleta(Integer id, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, Usuario usuario) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
@@ -48,7 +42,6 @@ public class Bicicleta{
         this.tamanhoAro = tamanhoAro;
         this.cor = cor;
         this.velocidade = velocidade;
-        this.valorHora = valorHora;
         this.usuario = usuario;
     }
 
@@ -118,13 +111,5 @@ public class Bicicleta{
 
     public void setVelocidade(String velocidade) {
         this.velocidade = velocidade;
-    }
-
-    public String getValorHora() {
-        return valorHora;
-    }
-
-    public void setValorHora(String valorHora) {
-        this.valorHora = valorHora;
     }
 }

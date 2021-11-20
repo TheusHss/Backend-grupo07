@@ -188,8 +188,7 @@ public class BicicletaController {
             if (bicicleta.getCategoria().equals(categoria)
                     && bicicleta.getTamanhoAro().equals(tamanhoAro)
                     && bicicleta.getCor().equals(cor)
-                    && bicicleta.getVelocidade().equals(velocidade)
-                    && bicicleta.getValorHora().equals(preco)) {
+                    && bicicleta.getVelocidade().equals(velocidade)) {
                 bicicletasFiltradas.add(bicicleta);
             }
         }
@@ -227,8 +226,8 @@ public class BicicletaController {
     @Autowired
     ServletContext context;
 
-    @PostMapping("/envio-arquivo/file")
-    public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile) {
+    @PostMapping("/envio-arquivo/file/{id}")
+    public ResponseEntity<FileInfo> upload(@RequestParam("file") MultipartFile inputFile, @PathVariable int id) {
         FileInfo fileInfo = new FileInfo();
         HttpHeaders headers = new HttpHeaders();
         if (!inputFile.isEmpty()) {
@@ -238,7 +237,7 @@ public class BicicletaController {
                 inputFile.transferTo(path);
                 headers.add("Arquivo recebido - ", "bicicleta");
 
-                gravaTxt.leArquivoRetonadoEgravaTxt("Arquivo-bike-retornado.txt", repository, pilha);
+                gravaTxt.leArquivoRetonadoEgravaTxt("Arquivo-bike-retornado.txt", repository, pilha, id);
 
                 return new ResponseEntity<FileInfo>(fileInfo, headers, HttpStatus.OK);
             } catch (Exception e) {
