@@ -102,97 +102,20 @@ public class BicicletaController {
         }
     }
 
-    @GetMapping("pesquisar/{categoria}")
-    public ResponseEntity filtrarBicicletas(@PathVariable String categoria) {
-        List<Bicicleta> bicicletas = repository.findAll();
-
+    @GetMapping("/filtrar")
+    public ResponseEntity filtroBicicletas(@RequestBody Bicicleta bicicletaRecebida){
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bicicleta : bicicletas) {
-            if (bicicleta.getCategoria().equals(categoria)) {
-                bicicletasFiltradas.add(bicicleta);
+        for (Bicicleta bike : repository.findAll()){
+            if (bike.getCategoria().equals(bicicletaRecebida.getCategoria())){
+                bicicletasFiltradas.add(bike);
+            }else if(bike.getTamanhoAro().equals(bicicletaRecebida.getTamanhoAro())){
+                bicicletasFiltradas.add(bike);
+            }else if(bike.getCor().equals(bicicletaRecebida.getCor())){
+                bicicletasFiltradas.add(bike);
+            }else if(bike.getVelocidade().equals(bicicletaRecebida.getVelocidade())){
+                bicicletasFiltradas.add(bike);
             }
         }
-
-        if (bicicletasFiltradas.size() > 0) {
-            return ResponseEntity.status(200).body(bicicletasFiltradas);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    @GetMapping("pesquisar/{categoria}/{tamanhoAro}")
-    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro) {
-        List<Bicicleta> bicicletas = repository.findAll();
-
-        List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bicicleta : bicicletas) {
-            if (bicicleta.getCategoria().equals(categoria) && bicicleta.getTamanhoAro().equals(tamanhoAro)) {
-                bicicletasFiltradas.add(bicicleta);
-            }
-        }
-
-        if (bicicletasFiltradas.size() > 0) {
-            return ResponseEntity.status(200).body(bicicletasFiltradas);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}")
-    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor) {
-        List<Bicicleta> bicicletas = repository.findAll();
-
-        List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bicicleta : bicicletas) {
-            if (bicicleta.getCategoria().equals(categoria)
-                    && bicicleta.getTamanhoAro().equals(tamanhoAro)
-                    && bicicleta.getCor().equals(cor)) {
-                bicicletasFiltradas.add(bicicleta);
-            }
-        }
-
-        if (bicicletasFiltradas.size() > 0) {
-            return ResponseEntity.status(200).body(bicicletasFiltradas);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}/{velocidade}")
-    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade) {
-        List<Bicicleta> bicicletas = repository.findAll();
-
-        List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bicicleta : bicicletas) {
-            if (bicicleta.getCategoria().equals(categoria)
-                    && bicicleta.getTamanhoAro().equals(tamanhoAro)
-                    && bicicleta.getCor().equals(cor)
-                    && bicicleta.getVelocidade().equals(velocidade)) {
-                bicicletasFiltradas.add(bicicleta);
-            }
-        }
-
-        if (bicicletasFiltradas.size() > 0) {
-            return ResponseEntity.status(200).body(bicicletasFiltradas);
-        } else {
-            return ResponseEntity.status(404).build();
-        }
-    }
-
-    @GetMapping("pesquisar/{categoria}/{tamanhoAro}/{cor}/{velocidade}/{preco}")
-    public ResponseEntity filtrarBicicletas(@PathVariable String categoria, @PathVariable String tamanhoAro, @PathVariable String cor, @PathVariable String velocidade, @PathVariable String preco) {
-        List<Bicicleta> bicicletas = repository.findAll();
-
-        List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bicicleta : bicicletas) {
-            if (bicicleta.getCategoria().equals(categoria)
-                    && bicicleta.getTamanhoAro().equals(tamanhoAro)
-                    && bicicleta.getCor().equals(cor)
-                    && bicicleta.getVelocidade().equals(velocidade)) {
-                bicicletasFiltradas.add(bicicleta);
-            }
-        }
-
         if (bicicletasFiltradas.size() > 0) {
             return ResponseEntity.status(200).body(bicicletasFiltradas);
         } else {
