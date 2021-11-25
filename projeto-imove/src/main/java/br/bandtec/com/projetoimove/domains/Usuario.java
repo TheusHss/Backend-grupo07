@@ -13,6 +13,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario", nullable = false)
     private Integer id;
+    @Column(name = "imagem", length = 50_000_000)
+    private byte[] imagem;
     @NotBlank
     @Column(name = "nome")
     private String nome;
@@ -45,7 +47,7 @@ public class Usuario {
 
 
 
-    public Usuario(String nome, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario, Boolean autenticado) {
+    public Usuario(String nome, byte[] imagem, String sobrenome, String email, String senha, String cpf, String telefone, String tipoUsuario, Boolean autenticado) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
@@ -59,6 +61,14 @@ public class Usuario {
     public Usuario(){
     }
 
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
 
     public Endereco getEndereco() {
         return endereco;

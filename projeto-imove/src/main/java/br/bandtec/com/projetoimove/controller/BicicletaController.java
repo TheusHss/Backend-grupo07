@@ -172,6 +172,59 @@ public class BicicletaController {
 
     }
 
+    @PostMapping("/bicicleta-imagem/{id}")
+    public ResponseEntity<FileInfo> uploadImagem(@RequestParam("file") MultipartFile inputFile, @PathVariable int id) throws IOException {
+        byte [] byteArr= inputFile.getBytes();
+        List<Bicicleta> bike = repository.findAll();
+        if (!bike.isEmpty()){
+            for (Bicicleta b : repository.findAll()){
+                if (b.getId().equals(id)){
+                    b.setImagem(byteArr);
+                    repository.save(b);
+                    return ResponseEntity.ok().build();
+                }
+            }
 
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @GetMapping("/bicicleta-imagem/{id}")
+    public ResponseEntity getFoto(@PathVariable int id) {
+        if (repository.existsById(id)) {
+            Bicicleta b = repository.getById(id);
+            if (b.getImagem() != null){
+                return ResponseEntity
+                        .status(200)
+                        .header("content-type", "image/jpeg")
+                        .body(b.getImagem());
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+
+    @GetMapping("/exportar-arquivo-total-bicicletas")
+    public ResponseEntity<?> total(@PathVariable int qtdBikes) {
+        gravaTxt.criarArquivoTxtBicicletas("total-bikes.txt", qtdBikes);
+
+        var filename = String.format("total-bikes.txt");
+
+        try {
+            File file = new File(filename);
+            var path = Paths.get(file.getAbsolutePath());
+            var resource = new ByteArrayResource(Files.readAllBytes(path));
+            return ResponseEntity
+                    .ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + filename)
+                    .contentType(MediaType.TEXT_PLAIN)
+                    .contentLength(file.length())
+                    .body(resource);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

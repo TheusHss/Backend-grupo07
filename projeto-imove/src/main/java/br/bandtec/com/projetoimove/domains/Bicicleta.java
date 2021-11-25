@@ -12,6 +12,8 @@ public class Bicicleta{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_bicicleta", nullable = false)
     private Integer id;
+    @Column(name = "imagem", length = 50_000_000)
+    private byte[] imagem;
     @NotBlank
     @Column(name = "marca")
     private String marca;
@@ -34,8 +36,9 @@ public class Bicicleta{
     private Usuario usuario;
 
 
-    public Bicicleta(Integer id, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, Usuario usuario) {
+    public Bicicleta(Integer id, byte[] imagem, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, Usuario usuario) {
         this.id = id;
+        this.imagem = imagem;
         this.marca = marca;
         this.modelo = modelo;
         this.categoria = categoria;
@@ -47,6 +50,14 @@ public class Bicicleta{
 
     public Bicicleta(){
 
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
     public Usuario getUsuario() {

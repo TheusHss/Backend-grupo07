@@ -3,6 +3,7 @@ package br.bandtec.com.projetoimove.controller;
 import br.bandtec.com.projetoimove.ArquivoCSV;
 import br.bandtec.com.projetoimove.ArquivoTXT;
 import br.bandtec.com.projetoimove.ListaObj;
+import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.model.Mail;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
@@ -157,4 +158,37 @@ public class UsuarioController {
         }
         return ResponseEntity.status(400).build();
     }
+
+
+    @PostMapping("/usuario-imagem/{id}")
+    public ResponseEntity<FileInfo> uploadImagem(@RequestParam("file") MultipartFile inputFile, @PathVariable int id) throws IOException {
+        byte [] byteArr= inputFile.getBytes();
+        List<Usuario> usuarios = repository.findAll();
+        if (!usuarios.isEmpty()){
+            for (Usuario b : usuarios){
+                if (b.getId().equals(id)){
+                    b.setImagem(byteArr);
+                    repository.save(b);
+                    return ResponseEntity.ok().build();
+                }
+            }
+
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+    @GetMapping("/usuario-imagem/{id}")
+    public ResponseEntity getFoto(@PathVariable int id) {
+        if (repository.existsById(id)) {
+            Usuario b = repository.getById(id);
+            if (b.getImagem() != null){
+                return ResponseEntity
+                        .status(200)
+                        .header("content-type", "image/jpeg")
+                        .body(b.getImagem());
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
 }

@@ -171,4 +171,43 @@ public class ArquivoTXT {
         }
     }
 
+    public static void criarArquivoTxtBicicletas(String nomeArq, int qtdBikes) {
+        File file = new File(nomeArq);
+        file.delete();
+
+        String header = "bicicletas";
+        Date dataDeHoje = new Date();
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        header += formataData.format(dataDeHoje);
+        gravaRegistro(nomeArq, header);
+        String corpo;
+
+        for (int i = 0; i < qtdBikes; i++) {
+
+            corpo = "01-Categoria:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "02-Cor:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "03-Tamanho-aro:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "04-Velocidade:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "05-Valor-hora:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "06-Marca:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = "07-Modelo:";
+            gravaRegistro(nomeArq, corpo);
+            corpo = (qtdBikes > 1 && i+1 < qtdBikes) ? "PULE ESTA LINHA" : "------------------";
+            gravaRegistro(nomeArq, corpo);
+        }
+
+        String trailer;
+        trailer = "Quantidade de bicicletas "+ qtdBikes + ". " +
+                "Verifique se o preenchimento dos campos estão corretos antes de enviar,\n" +
+                "caso esteja errado edite na tela de suas bicicletas ou entre em contato.\nIMove Agredece!";
+        gravaRegistro(nomeArq,trailer);
+
+    }
+
 }
