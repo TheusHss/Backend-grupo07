@@ -102,24 +102,51 @@ public class BicicletaController {
         }
     }
 
-    @GetMapping("/filtrar")
-    public ResponseEntity filtroBicicletas(@RequestBody Bicicleta bicicletaRecebida){
+    @GetMapping("/filtrar/{categoria}/{aro}/{cor}/{velocidade}")
+    public ResponseEntity filtroBicicletas(@PathVariable String categoria, @PathVariable String aro, @PathVariable String cor, @PathVariable String velocidade) {
         List<Bicicleta> bicicletasFiltradas = new ArrayList<>();
-        for (Bicicleta bike : repository.findAll()){
-            if (bike.getCategoria().equals(bicicletaRecebida.getCategoria())){
-                bicicletasFiltradas.add(bike);
-            }else if(bike.getTamanhoAro().equals(bicicletaRecebida.getTamanhoAro())){
-                bicicletasFiltradas.add(bike);
-            }else if(bike.getCor().equals(bicicletaRecebida.getCor())){
-                bicicletasFiltradas.add(bike);
-            }else if(bike.getVelocidade().equals(bicicletaRecebida.getVelocidade())){
-                bicicletasFiltradas.add(bike);
+
+
+
+        boolean verificador = false;
+        boolean verificador1 = false;
+        boolean verificador2 = false;
+        boolean verificador3 = false;
+
+        for (Bicicleta bicicleta : repository.findAll()){
+            if (!bicicleta.getCategoria().equals(categoria)){
+                verificador = true;
+            }
+            if(verificador && categoria.equals("null")){
+                verificador = false;
+            }
+            if (!bicicleta.getTamanhoAro().equals(aro)){
+                verificador1 = true;
+            }
+            if(verificador1 &&aro.equals("null")){
+                verificador1 = false;
+            }
+            if (!bicicleta.getCor().equals(cor)){
+                verificador2 = true;
+            }
+            if(verificador2 &&cor.equals("null")){
+                verificador2 = false;
+            }
+            if (!bicicleta.getVelocidade().equals(velocidade)){
+                verificador3 = true;
+            }
+            if(verificador3 &&velocidade.equals("null")){
+                verificador3 = false;
+            }
+            if (!verificador && !verificador1 && !verificador2 && !verificador3){
+                bicicletasFiltradas.add(bicicleta);
             }
         }
+
         if (bicicletasFiltradas.size() > 0) {
             return ResponseEntity.status(200).body(bicicletasFiltradas);
         } else {
-            return ResponseEntity.status(404).build();
+            return ResponseEntity.status(404).body(bicicletasFiltradas);
         }
     }
 
