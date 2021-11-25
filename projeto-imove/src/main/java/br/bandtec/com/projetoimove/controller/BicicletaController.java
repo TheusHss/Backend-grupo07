@@ -141,6 +141,10 @@ public class BicicletaController {
             if (!verificador && !verificador1 && !verificador2 && !verificador3){
                 bicicletasFiltradas.add(bicicleta);
             }
+           verificador = false;
+            verificador1 = false;
+            verificador2 = false;
+            verificador3 = false;
         }
 
         if (bicicletasFiltradas.size() > 0) {
