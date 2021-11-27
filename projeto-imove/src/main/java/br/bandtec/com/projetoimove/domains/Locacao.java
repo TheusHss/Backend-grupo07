@@ -29,6 +29,14 @@ public class Locacao {
     public Locacao() {
     }
 
+    public Bicicleta getBicicleta() {
+        return bicicleta;
+    }
+
+    public void setBicicleta(Bicicleta bicicleta) {
+        this.bicicleta = bicicleta;
+    }
+
     public Integer getId() {
         return id;
     }

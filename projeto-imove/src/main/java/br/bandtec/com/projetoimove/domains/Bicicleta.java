@@ -32,11 +32,13 @@ public class Bicicleta{
     @NotBlank
     @Column(name = "velocidade")
     private String velocidade;
+    @Column(name = "alocada")
+    private Boolean alocada;
     @ManyToOne
     private Usuario usuario;
 
 
-    public Bicicleta(Integer id, byte[] imagem, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, Usuario usuario) {
+    public Bicicleta(Integer id, byte[] imagem, String marca, String modelo, String categoria, String tamanhoAro, String cor, String velocidade, Usuario usuario, Boolean alocada) {
         this.id = id;
         this.imagem = imagem;
         this.marca = marca;
@@ -46,10 +48,19 @@ public class Bicicleta{
         this.cor = cor;
         this.velocidade = velocidade;
         this.usuario = usuario;
+        this.alocada = alocada;
     }
 
     public Bicicleta(){
 
+    }
+
+    public Boolean getAlocada() {
+        return alocada;
+    }
+
+    public void setAlocada(Boolean alocada) {
+        this.alocada = alocada;
     }
 
     public byte[] getImagem() {

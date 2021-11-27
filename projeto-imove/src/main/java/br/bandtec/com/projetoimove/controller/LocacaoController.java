@@ -1,7 +1,9 @@
 package br.bandtec.com.projetoimove.controller;
 
 
+import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Locacao;
+import br.bandtec.com.projetoimove.repository.BicicletaRepository;
 import br.bandtec.com.projetoimove.repository.LocacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,15 @@ public class LocacaoController {
     @Autowired
     private LocacaoRepository repository;
 
+    @Autowired
+    private BicicletaRepository bicicletaRepository;
+
     @PostMapping("/cadastrar-locacao")
     public ResponseEntity cadastrarLocacao(@RequestBody Locacao locacao) {
         repository.save(locacao);
+        Bicicleta b = bicicletaRepository.getById(locacao.getBicicleta().getId());
+        b.setAlocada(true);
+        bicicletaRepository.save(b);
         return ResponseEntity.status(201).body(locacao.getId());
     }
 

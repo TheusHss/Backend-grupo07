@@ -48,6 +48,14 @@ public class BicicletaController {
         }
     }
 
+    @GetMapping("/bicicleta/{id}")
+    public ResponseEntity bicicletaPorId(@PathVariable int id) {
+        if (repository.existsById(id)) {
+            return ResponseEntity.status(200).body(repository.findById(id));
+        }
+        return ResponseEntity.status(404).build();
+    }
+
     @GetMapping("/bicicleta-por-usuario/{id}")
     public ResponseEntity bicicletaId(@PathVariable int id) {
         List<Bicicleta> bike = repository.findAll();
