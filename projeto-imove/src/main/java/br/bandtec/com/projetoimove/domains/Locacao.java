@@ -17,6 +17,8 @@ public class Locacao {
     private LocalDateTime dataHoraLocacao;
     @Column(name = "data_hora_devolucao")
     private LocalDateTime dataHoraDevolucao;
+    @ManyToOne
+    private Bicicleta bicicleta;
 
     public Locacao(String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
         this.formaPagamento = formaPagamento;
