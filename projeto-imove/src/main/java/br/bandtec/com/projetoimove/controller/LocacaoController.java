@@ -5,10 +5,13 @@ import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Locacao;
 import br.bandtec.com.projetoimove.repository.BicicletaRepository;
 import br.bandtec.com.projetoimove.repository.LocacaoRepository;
+import org.apache.catalina.LifecycleState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -36,10 +39,30 @@ public class LocacaoController {
         return ResponseEntity.status(200).body(locacao);
     }
 
+    @GetMapping("/consultar-locacao-uso/{id}")
+    public ResponseEntity consultarLocacaoUso(@PathVariable int id){
+        List<Locacao> locacao = repository.findAll();
+        List<Locacao> lista = new ArrayList<>();
+
+        for (Locacao l : locacao){
+            if (l.getUsuarioLocatario().getId().equals(id)){
+                lista.add(l);
+            }
+        }
+        if(lista.isEmpty()){
+            return ResponseEntity.status(404).build();
+        }
+        return ResponseEntity.status(200).body(locacao);
+    }
+
     @DeleteMapping("cancelar/{id}")
     public ResponseEntity removerLocacao(@PathVariable int id) {
         if (repository.existsById(id)) {
+            Locacao locacao = repository.getById(id);
             repository.deleteById(id);
+            Bicicleta b = bicicletaRepository.getById(locacao.getBicicleta().getId());
+            b.setAlocada(false);
+            bicicletaRepository.save(b);
             return ResponseEntity.status(200).build();
         } else {
             return ResponseEntity.status(404).build();

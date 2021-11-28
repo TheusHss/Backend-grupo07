@@ -1,0 +1,21 @@
+Cadastre aqui suas bicicletas de uma vez! - 25-11-2021 21:39:33
+01-Categoria:a
+02-Cor:a
+03-Tamanho-aro:a
+04-Velocidade:a
+05-Valor-hora:a
+06-Marca:a
+07-Modelo:a
+PULE ESTA LINHA
+01-Categoria:a2
+02-Cor:a2
+03-Tamanho-aro:a2
+04-Velocidade:a2
+05-Valor-hora:a2
+06-Marca:a2
+07-Modelo:a2
+PULE ESTA LINHA
+------------------
+Quantidade de bicicletas 10. Verifique se o preenchimento dos campos estão corretos antes de enviar,
+caso esteja errado edite na tela de suas bicicletas ou entre em contato.
+IMove Agredece!

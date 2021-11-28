@@ -52,6 +52,14 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity usuarioPorId(@PathVariable int id) {
+        if (repository.existsById(id)) {
+            return ResponseEntity.status(200).body(repository.findById(id));
+        }
+        return ResponseEntity.status(404).build();
+    }
+
     @PostMapping("/cadastrar")
     public ResponseEntity cadastrarUsuario(@RequestBody Usuario usuario) {
 //        listaObj.adiciona(usuario);

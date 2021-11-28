@@ -19,6 +19,8 @@ public class Locacao {
     private LocalDateTime dataHoraDevolucao;
     @ManyToOne
     private Bicicleta bicicleta;
+    @ManyToOne
+    private Usuario usuarioLocatario;
 
     public Locacao(String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
         this.formaPagamento = formaPagamento;
@@ -63,6 +65,14 @@ public class Locacao {
 
     public LocalDateTime getDataHoraDevolucao() {
         return dataHoraDevolucao;
+    }
+
+    public Usuario getUsuarioLocatario() {
+        return usuarioLocatario;
+    }
+
+    public void setUsuarioLocatario(Usuario usuarioLocatario) {
+        this.usuarioLocatario = usuarioLocatario;
     }
 
     public void setDataHoraDevolucao(LocalDateTime dataHoraDevolucao) {
