@@ -147,6 +147,22 @@ public class UsuarioController {
     }
 
 
+    @PutMapping("/alterar-senha/{email}/{senha}/{novaSenha}")
+    public ResponseEntity alterarSenha(@PathVariable String email, @PathVariable String senha, @PathVariable String novaSenha) {
+        List<Usuario> usuarios = repository.findAll();
+        if (!usuarios.isEmpty()) {
+            for (Usuario u : usuarios) {
+                if (u.getEmail().equals(email) && u.obterSenha().equals(senha)) {
+                    u.setSenha(novaSenha);
+                    repository.save(u);
+                    return ResponseEntity.status(200).build();
+                }
+            }
+        }
+        return ResponseEntity.status(404).build();
+    }
+
+
     @PostMapping("/autenticar")
     public ResponseEntity autenticarUsuario(@RequestBody Usuario usuario) {
         for (Usuario usuarioItem : repository.findAll()) {
