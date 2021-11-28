@@ -168,7 +168,7 @@ public class UsuarioController {
     }
 
 
-    @PostMapping("/usuario-imagem/{id}")
+    @PostMapping("/imagem/{id}")
     public ResponseEntity<FileInfo> uploadImagem(@RequestParam("file") MultipartFile inputFile, @PathVariable int id) throws IOException {
         byte [] byteArr= inputFile.getBytes();
         List<Usuario> usuarios = repository.findAll();
@@ -185,7 +185,7 @@ public class UsuarioController {
         return ResponseEntity.status(404).build();
     }
 
-    @GetMapping("/usuario-imagem/{id}")
+    @GetMapping("/imagem/{id}")
     public ResponseEntity getFoto(@PathVariable int id) {
         if (repository.existsById(id)) {
             Usuario b = repository.getById(id);
