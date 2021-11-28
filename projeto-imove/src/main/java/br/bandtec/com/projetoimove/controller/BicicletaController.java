@@ -244,8 +244,9 @@ public class BicicletaController {
 
 
     @GetMapping("/exportar-arquivo-total-bicicletas")
-    public ResponseEntity<?> total(@PathVariable int qtdBikes) {
-        gravaTxt.criarArquivoTxtBicicletas("total-bikes.txt", qtdBikes);
+    public ResponseEntity<?> total() {
+        List<Bicicleta> bike = repository.findAll();
+        gravaTxt.gravaArquivoTxt(bike,"total-bikes.txt");
 
         var filename = String.format("total-bikes.txt");
 

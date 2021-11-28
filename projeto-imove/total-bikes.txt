@@ -1,0 +1,13 @@
+00BICICLETA2021228-11-2021 20:03:2301
+010000000000
+00BICICLETA2021228-11-2021 20:05:0901
+010000000000
+00BICICLETA2021228-11-2021 20:08:1301
+022  azul e verde   ciclismo            caloi1              naosei              27        20        
+023  azul e verde   ciclismo            caloi1              naosei              27        20        
+024  azul e verde   ciclismo            caloi1              naosei              27        20        
+025  azul e verde   ciclismo            caloi1              naosei              27        20        
+026  azul e verde   ciclismo            caloi1              naosei              27        20        
+027  azul e verde   ciclismo            caloi1              naosei              27        20        
+028  azul e verde   ciclismo            caloi1              naosei              27        20        
+010000000007

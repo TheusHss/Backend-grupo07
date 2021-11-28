@@ -4,6 +4,9 @@ import br.bandtec.com.projetoimove.domains.Bicicleta;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.repository.BicicletaRepository;
 import org.springframework.data.repository.support.Repositories;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -208,6 +211,43 @@ public class ArquivoTXT {
                 "caso esteja errado edite na tela de suas bicicletas ou entre em contato.\nIMove Agredece!";
         gravaRegistro(nomeArq,trailer);
 
+    }
+
+    public static void gravaArquivoTxt(List<Bicicleta> lista, String nomeArq){
+        File file = new File(nomeArq);
+        file.delete();
+
+        int contaRegistro = 0;
+
+        // Monta o registro de header
+        String header = "00BICICLETA20212";
+        Date dataDeHoje = new Date();
+        SimpleDateFormat formataData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        header += formataData.format(dataDeHoje);
+        header += "01";
+
+        // Grava o resgistro do header
+        gravaRegistro(nomeArq, header);
+
+        // Monta e grava o corpo
+        String corpo;
+        for (Bicicleta a : lista){
+            corpo = "02";
+            corpo += String.format("%-3.3s", a.getId());
+            corpo += String.format("%-15.15s", a.getCor());
+            corpo += String.format("%-20.20s", a.getCategoria());
+            corpo += String.format("%-20.20s", a.getMarca());
+            corpo += String.format("%-20.20s", a.getModelo());
+            corpo += String.format("%-10.10s", a.getTamanhoAro());
+            corpo += String.format("%-10.10s", a.getVelocidade());
+            gravaRegistro(nomeArq, corpo);
+            contaRegistro++;
+        }
+
+        // Monta e grava o trailer
+        String trailer = "01";
+        trailer += String.format("%010d", contaRegistro);
+        gravaRegistro(nomeArq, trailer);
     }
 
 }
