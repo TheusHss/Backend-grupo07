@@ -4,8 +4,10 @@ import br.bandtec.com.projetoimove.ArquivoCSV;
 import br.bandtec.com.projetoimove.ArquivoTXT;
 import br.bandtec.com.projetoimove.ListaObj;
 import br.bandtec.com.projetoimove.domains.Bicicleta;
+import br.bandtec.com.projetoimove.domains.Endereco;
 import br.bandtec.com.projetoimove.domains.Usuario;
 import br.bandtec.com.projetoimove.model.Mail;
+import br.bandtec.com.projetoimove.repository.EnderecoRepository;
 import br.bandtec.com.projetoimove.repository.UsuarioRepository;
 import br.bandtec.com.projetoimove.service.MailService;
 import org.apache.tomcat.jni.FileInfo;
@@ -39,6 +41,9 @@ public class UsuarioController {
     private UsuarioRepository repository;
 
     @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
     private MailService mailService;
 
     @GetMapping("/todos")
@@ -67,6 +72,24 @@ public class UsuarioController {
 //        funtionsCSV.gravaLista(listaObj, "log-cadastro");
 //        ListaObj<Usuario> listaObj = new ListaObj();
         return ResponseEntity.status(201).build();
+    }
+
+    @PutMapping("/alterar-cadastro")
+    public ResponseEntity alterarUsuario(@RequestBody Usuario usuario) {
+        Endereco end = usuario.getEndereco();
+        List<Usuario> usuarios = repository.findAll();
+        for(Usuario ur: usuarios){
+            if (ur.getId().equals(usuario.getId())){
+                ur.setNome(usuario.getNome());
+                ur.setSobrenome(usuario.getSobrenome());
+                ur.setCpf(usuario.getCpf());
+                ur.setTelefone(usuario.getTelefone());
+                repository.save(ur);
+                enderecoRepository.save(end);
+                return ResponseEntity.status(201).build();
+            }
+        }
+        return ResponseEntity.status(404).build();
     }
 
     @PostMapping("/verificar-codigo/{codigo}")
