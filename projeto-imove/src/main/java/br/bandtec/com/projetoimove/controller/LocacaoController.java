@@ -55,6 +55,18 @@ public class LocacaoController {
         return ResponseEntity.status(200).body(locacao);
     }
 
+    @GetMapping("/consultar-locacao-locador/{id}")
+    public ResponseEntity consultarLocador(@PathVariable int id){
+        List<Locacao> locacao = repository.findAll();
+
+        for (Locacao l : locacao) {
+            if (l.getBicicleta().getUsuario().getId().equals(id)) {
+                return ResponseEntity.status(200).body(l);
+            }
+        }
+            return ResponseEntity.status(404).build();
+    }
+
     @DeleteMapping("cancelar/{id}")
     public ResponseEntity removerLocacao(@PathVariable int id) {
         if (repository.existsById(id)) {

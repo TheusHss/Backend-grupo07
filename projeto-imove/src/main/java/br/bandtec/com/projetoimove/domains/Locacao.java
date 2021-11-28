@@ -20,7 +20,7 @@ public class Locacao {
     @ManyToOne
     private Bicicleta bicicleta;
     @ManyToOne
-    private Usuario usuarioLocatario;
+        private Usuario usuarioLocatario;
 
     public Locacao(String formaPagamento, LocalDateTime dataHoraLocacao, LocalDateTime dataHoraDevolucao) {
         this.formaPagamento = formaPagamento;
