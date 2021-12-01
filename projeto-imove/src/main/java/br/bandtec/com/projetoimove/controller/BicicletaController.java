@@ -81,8 +81,12 @@ public class BicicletaController {
     @DeleteMapping("/remover-ultima")
     public ResponseEntity removerBike() {
         if (!pilha.isEmpty()) {
-            pilhaAux.push(pilha.peek());
-            repository.delete(pilha.pop());
+            Bicicleta aux = pilha.pop();
+            Bicicleta original = repository.getById(aux.getId());
+            byte[] imagem = original.getImagem();
+            aux.setImagem(imagem);
+            pilhaAux.push(aux);
+            repository.delete(aux);
             return ResponseEntity.status(200).build();
         }
         return ResponseEntity.status(204).build();
@@ -103,6 +107,7 @@ public class BicicletaController {
     @DeleteMapping("remover/{id}")
     public ResponseEntity removerBicicleta(@PathVariable int id) {
         if (repository.existsById(id)) {
+            Bicicleta b = repository.getById(id);
             repository.deleteById(id);
             return ResponseEntity.status(200).build();
         } else {
