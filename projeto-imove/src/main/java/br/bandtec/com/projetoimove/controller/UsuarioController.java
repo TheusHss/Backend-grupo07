@@ -118,7 +118,7 @@ public class UsuarioController {
                         int digitos = (int) (0000 + Math.random() * 8999);
                         mail.setMailContent("Olá " + nome + ", Seu código:\n\n" + digitos +
                                 "\n\nNão compartilhe!!!" +
-                                "\nIMOVE AGRADEÇE");
+                                "\nIMOVE AGRADECE");
                         mailService.sendEmail(mail);
                         codigoArmazenado = digitos;
                         return ResponseEntity.status(200).body(digitos);
